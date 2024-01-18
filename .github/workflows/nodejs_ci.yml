@@ -1,5 +1,6 @@
 name: Node.js CI
-
+env:
+  NODE_ENV: production
 on:
   push:
     branches: [ main ]
@@ -12,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Print environment variable
+        run: echo $NODE_ENV
       - uses: actions/checkout@v2
       - name: Setup Node.js
         uses: actions/setup-node@v2
