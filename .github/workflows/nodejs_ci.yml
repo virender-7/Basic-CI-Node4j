@@ -15,6 +15,10 @@ jobs:
     steps:
       - name: Print environment variable
         run: echo $NODE_ENV
+      - name: Use Repo Secret
+        run: echo "Repo Secret:${{secrets.API_KEY}}"
+      - name: Use Environment Secret
+        run: echo "Environment Secret:${{secrets.PROD_DB_PASSWORD}}"
       - uses: actions/checkout@v2
       - name: Setup Node.js
         uses: actions/setup-node@v2
