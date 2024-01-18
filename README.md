@@ -1,3 +1,1 @@
-# my-first-action
-
-## updating read me file
+# Basic CI Workflow for Node.js
