@@ -3,9 +3,8 @@ env:
   NODE_ENV: production
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ Hand-On_09 ]
+  
 
 jobs:
   build:
@@ -13,12 +12,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
       - name: Print environment variable
         run: echo $NODE_ENV
       - name: Use Repo Secret
-        run: echo "Repo Secret:${{secrets.API_KEY}}"
+        env:
+          SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
+        run: |
+          echo "Secret API Key: $SECRET_API_KEY"
       - name: Use Environment Secret
-        run: echo "Environment Secret:${{secrets.PROD_DB_PASSWORD}}"
+        env:
+          Env_Key: ${{ secrets.PROD_DB_PASSWORD }}
+        run: |
+          echo "Environment Secret: $Env_key"
       - name: Print GitHub Context
         run: |
           echo "GitHub Context:"
@@ -31,14 +47,5 @@ jobs:
         run: |
           echo "Runner Context:"
           echo "${{ toJson(runner) }}"
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
-      - name: Install Dependencies
-        run: npm install
-      - name: Run Build
-        run: npm run build --if-present
-      - name: Run Tests
-        run: npm test
+      
+     
