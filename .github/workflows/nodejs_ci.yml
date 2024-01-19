@@ -27,7 +27,7 @@ jobs:
         run: echo $NODE_ENV
       - name: Use Repo Secret
         env:
-          SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
+          SECRET_API_KEY: ${{ secrets.API_KEY }}
         run: |
           echo "Secret API Key: $SECRET_API_KEY"
       - name: Use Environment Secret
